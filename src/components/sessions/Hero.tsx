@@ -4,8 +4,14 @@ import Partners from "./Partners";
 
 export default function Hero() {
   return (
-    <div className="w-full flex flex-col">
-      <div className="relative h-dvh w-full overflow-hidden shrink-0">
+    <div className="relative w-full flex flex-col">
+      <div className="absolute top-0 left-0 z-20 w-full bg-transparent px-section py-4">
+        <div className="mx-auto max-w-7xl">
+          <Header ctaText="Conheça as trilhas" />
+        </div>
+      </div>
+
+      <div className="relative h-[85vh] min-h-[600px] w-full overflow-hidden sm:h-[100dvh] shrink-0">
         <Image
           src="/images/hero-bg.jpg"
           alt=""
@@ -15,10 +21,8 @@ export default function Hero() {
           className="object-cover object-top"
         />
 
-        <div className="relative z-10 flex h-full flex-col justify-between px-section py-6 sm:py-8">
+        <div className="relative z-10 flex h-full flex-col justify-end px-section pb-10 sm:pb-14">
           <div className="mx-auto w-full max-w-7xl flex-1 flex flex-col">
-            <Header />
-
             {/* Texto Hero */}
             <div className="w-full flex-1 flex flex-col justify-center pb-20 md:justify-end md:pb-0">
               <div className="max-w-3xl">

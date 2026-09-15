@@ -96,10 +96,10 @@ export default function Header({
 
         {/* Desktop Nav */}
         <nav className="hidden text-sm font-medium text-white sm:text-base md:flex flex-wrap items-center gap-x-6 lg:gap-x-10">
-          <a href="#" className="transition-colors hover:text-gray-200">
+          <a href="/" className="transition-colors hover:text-gray-200">
             Home
           </a>
-          <a href="#" className="transition-colors hover:text-gray-200">
+          <a href="/produtos" className="transition-colors hover:text-gray-200">
             Produtos
           </a>
           <a href="#" className="transition-colors hover:text-gray-200">
