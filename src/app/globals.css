@@ -10,6 +10,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-baloo: var(--font-baloo-2);
+  --font-caveat: var(--font-caveat);
+  --font-amsi: var(--font-amsiprocond);
+  --font-casual: var(--font-casual);
+  --font-domea: var(--font-domea-scrawl);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +28,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .px-section {
+    @apply px-8 sm:px-12 md:px-16 lg:px-24 xl:px-46;
+  }
 }
