@@ -24,7 +24,7 @@ export default function Hero() {
         <div className="relative z-10 flex h-full flex-col justify-end px-section pb-10 sm:pb-14">
           <div className="mx-auto w-full max-w-7xl flex-1 flex flex-col">
             {/* Texto Hero */}
-            <div className="w-full flex-1 flex flex-col justify-center pb-20 md:justify-end md:pb-0">
+            <div className="w-full flex-1 flex flex-col justify-end pb-8 md:pb-0">
               <div className="max-w-3xl">
                 <h1 className="font-baloo text-5xl uppercase leading-[0.85] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-md">
                   Trilhas vivas,

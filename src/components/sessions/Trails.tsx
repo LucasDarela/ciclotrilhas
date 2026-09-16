@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Difficulty = "iniciante" | "intermediario" | "avancado" | "extremo";
 
 type Trail = {
@@ -31,49 +33,15 @@ const difficultyStyles: Record<Difficulty, { bg: string; label: string }> = {
   extremo: { bg: "#0A0A0A", label: "Extremo" },
 };
 
-function DifficultyIcon({ difficulty }: { difficulty: Difficulty }) {
-  switch (difficulty) {
-    case "iniciante":
-      return (
-        <svg viewBox="0 0 24 24" className="h-full w-full p-1.5">
-          <polyline
-            points="5,13 10,18 19,6"
-            fill="none"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case "intermediario":
-      return (
-        <svg viewBox="0 0 24 24" className="h-full w-full p-1.5">
-          <polyline
-            points="3,17 8,9 12,14 16,6 21,13"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
-    case "avancado":
-      return (
-        <svg viewBox="0 0 24 24" className="h-full w-full p-1.5">
-          <polygon points="12,4 20,12 12,20 4,12" fill="white" />
-        </svg>
-      );
-    case "extremo":
-      return (
-        <svg viewBox="0 0 24 24" className="h-full w-full p-1.5">
-          <polygon points="7.5,4 13.5,12 7.5,20 1.5,12" fill="white" />
-          <polygon points="16.5,4 22.5,12 16.5,20 10.5,12" fill="white" />
-        </svg>
-      );
-  }
-}
+const badgeImages = {
+  iniciante: { sm: "/niveis-trilha/n1.png", lg: "/niveis-trilha/nivel1.png" },
+  intermediario: {
+    sm: "/niveis-trilha/n2.png",
+    lg: "/niveis-trilha/nivel2.png",
+  },
+  avancado: { sm: "/niveis-trilha/n3.png", lg: "/niveis-trilha/nivel3.png" },
+  extremo: { sm: "/niveis-trilha/n4.png", lg: "/niveis-trilha/nivel4.png" },
+};
 
 function DifficultyBadge({
   difficulty,
@@ -82,15 +50,18 @@ function DifficultyBadge({
   difficulty: Difficulty;
   size?: "sm" | "lg";
 }) {
-  const style = difficultyStyles[difficulty];
-  const dimensions = size === "sm" ? "h-7 w-7 sm:h-8 sm:w-8" : "h-14 w-14 sm:h-16 sm:w-16";
+  const src = badgeImages[difficulty][size];
+  const dimensions =
+    size === "sm" ? "h-7 w-7 sm:h-8 sm:w-8" : "h-24 w-24 sm:h-28 sm:w-28";
 
   return (
-    <div
-      className={`${dimensions} shrink-0 rounded-sm`}
-      style={{ backgroundColor: style.bg }}
-    >
-      <DifficultyIcon difficulty={difficulty} />
+    <div className={`relative shrink-0 ${dimensions}`}>
+      <Image
+        src={src}
+        alt={`Dificuldade ${difficulty}`}
+        fill
+        className="object-contain"
+      />
     </div>
   );
 }
@@ -119,17 +90,20 @@ function TrailCard({ trail }: { trail: Trail | null }) {
 export default function Trails() {
   return (
     <div className="w-full bg-[#15311B] py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-section">
+      <div className="mx-auto px-section">
         <div className="mb-8 flex items-center justify-between gap-6 sm:mb-10">
-          <h2 className="font-baloo text-4xl uppercase leading-[0.9] tracking-tight text-white sm:text-5xl">
+          <h2 className="font-baloo text-4xl uppercase leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl">
             Quais são
             <br />
             as trilhas?
           </h2>
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md border border-dashed border-white/30 sm:h-20 sm:w-20">
-            <span className="text-center text-[10px] uppercase text-white/50">
-              Logo Trailforks
-            </span>
+          <div className="relative h-16 w-32 shrink-0 sm:h-20 sm:w-40">
+            <Image
+              src="/logos/logo-trailforks.png"
+              alt="Logo Trailforks"
+              fill
+              className="object-contain"
+            />
           </div>
         </div>
 
@@ -139,21 +113,21 @@ export default function Trails() {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col items-start justify-between gap-6 rounded-md bg-white px-6 py-6 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
-          <span className="font-baloo text-2xl uppercase leading-none text-black sm:text-3xl">
+        <div className="mt-6 flex flex-col items-center justify-center gap-8 rounded-md bg-white px-6 py-8 sm:mt-8 lg:flex-row lg:justify-between lg:gap-4">
+          <span className="text-center font-baloo text-3xl uppercase leading-none text-black md:text-4xl lg:text-left lg:text-5xl">
             Respeite
-            <br />
+            <br className="hidden lg:block" />
+            <span className="lg:hidden"> </span>
             seu limite!
           </span>
-          <div className="flex flex-wrap items-start justify-center gap-6 sm:gap-8">
-            {(Object.keys(difficultyStyles) as Difficulty[]).map((difficulty) => (
-              <div key={difficulty} className="flex flex-col items-center gap-2">
-                <DifficultyBadge difficulty={difficulty} size="lg" />
-                <span className="text-center text-xs font-semibold uppercase text-black">
-                  {difficultyStyles[difficulty].label}
-                </span>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:flex md:flex-nowrap md:justify-center md:gap-4 lg:gap-4">
+            {(Object.keys(difficultyStyles) as Difficulty[]).map(
+              (difficulty) => (
+                <div key={difficulty} className="flex flex-col items-center">
+                  <DifficultyBadge difficulty={difficulty} size="lg" />
+                </div>
+              ),
+            )}
           </div>
         </div>
       </div>

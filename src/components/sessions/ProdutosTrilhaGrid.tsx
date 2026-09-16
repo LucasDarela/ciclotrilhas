@@ -22,7 +22,7 @@ const products = [
 export default function ProdutosTrilhaGrid() {
   return (
     <div className="w-full bg-[#D9D9D9] px-section py-16 overflow-hidden">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-2">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-y-12 sm:gap-y-16">
         {products.map((product, index) => {
           const isRightColumn = index % 2 === 1;
           return (

@@ -6,11 +6,15 @@ import Button from "./Button";
 interface HeaderProps {
   ctaText?: string;
   ctaHref?: string;
+  hideCta?: boolean;
+  ctaClassName?: string;
 }
 
 export default function Header({
   ctaText = "Conheça as trilhas",
   ctaHref = "#",
+  hideCta = false,
+  ctaClassName = "",
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,26 +44,31 @@ export default function Header({
             </svg>
           </button>
           <nav className="flex flex-col items-center gap-y-8 text-2xl font-medium text-white">
-            <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/" onClick={() => setIsMobileMenuOpen(false)}>
               Home
             </a>
-            <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/produtos" onClick={() => setIsMobileMenuOpen(false)}>
               Produtos
             </a>
-            <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
+            <a
+              href="/faca-sua-doacao"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Faça sua doação
             </a>
-            <a href="#" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/quem-somos" onClick={() => setIsMobileMenuOpen(false)}>
               Quem somos?
             </a>
-            <Button
-              href={ctaHref}
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="outline-white"
-              className="mt-4"
-            >
-              {ctaText}
-            </Button>
+            {!hideCta && (
+              <Button
+                href={ctaHref}
+                onClick={() => setIsMobileMenuOpen(false)}
+                variant="outline-white"
+                className="mt-4"
+              >
+                {ctaText}
+              </Button>
+            )}
           </nav>
         </div>
       )}
@@ -102,17 +111,23 @@ export default function Header({
           <a href="/produtos" className="transition-colors hover:text-gray-200">
             Produtos
           </a>
-          <a href="#" className="transition-colors hover:text-gray-200">
+          <a
+            href="/faca-sua-doacao"
+            className="transition-colors hover:text-gray-200"
+          >
             Faça sua doação
           </a>
-          <a href="#" className="transition-colors hover:text-gray-200">
+          <a
+            href="/quem-somos"
+            className="transition-colors hover:text-gray-200"
+          >
             Quem somos?
           </a>
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
-          <Button href={ctaHref}>{ctaText}</Button>
+        <div className={`hidden md:block ${hideCta ? "invisible pointer-events-none" : ""}`}>
+          <Button href={ctaHref} className={ctaClassName}>{ctaText}</Button>
         </div>
       </header>
     </>
